@@ -1,5 +1,6 @@
 import pickle
 factor_cache = {}
+muliple_cache = {}
 
 def init_factor_cache(file_name):
     global factor_cache
@@ -33,7 +34,24 @@ def print_factors(num_list):
     factor_cache[key] = factor_list
 
 def print_multiples(num_list):
-    pass
+    global muliple_cache
+    sorted_list = sorted(num_list)
+    key = tuple(sorted_list)
+    if key in muliple_cache:
+        # Already calculated this one
+        # No need to do it again
+        print(muliple_cache[key])
+        return
+    multiple_list = {}
+    for i in range(0, len(sorted_list)):
+        multiples = []
+        for j in range(i + 1, len(sorted_list)):
+            if sorted_list[j] % sorted_list[i] == 0:
+                multiples.append(sorted_list[j])
+        multiple_list[sorted_list[i]] = multiples
+
+    print(multiple_list)
+    muliple_cache[key] = multiple_list
 
 
 if __name__ == "__main__":
@@ -43,6 +61,8 @@ if __name__ == "__main__":
     print_factors(nums)
     print_factors(nums)
     print_factors(nums)
+    print_multiples(nums)
+    print_multiples(nums)
 
     save_factor_cache("factor_cache.in")
 
