@@ -5,13 +5,19 @@ muliple_cache = {}
 def init_cache():
     global factor_cache
     global muliple_cache
-    cache_file = open("factor_cache.in", "rb")
-    factor_cache = pickle.load(cache_file)
-    cache_file.close()
+    try:
+        cache_file = open("factor_cache.in", "rb")
+        factor_cache = pickle.load(cache_file)
+        cache_file.close()
+    except:
+        pass
 
-    cache_file = open("multiple_cache.in", "rb")
-    muliple_cache = pickle.load(cache_file)
-    cache_file.close()
+    try:
+        cache_file = open("multiple_cache.in", "rb")
+        muliple_cache = pickle.load(cache_file)
+        cache_file.close()
+    except:
+        pass
 
 def save_cache():
     cache_file = open("factor_cache.in", "wb")
