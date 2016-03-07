@@ -1,4 +1,5 @@
 import pickle
+import sys
 factor_cache = {}
 muliple_cache = {}
 
@@ -35,8 +36,7 @@ def print_factors(num_list):
     if key in factor_cache:
         # Already calculated this one
         # No need to do it again
-        print("CACHE")
-        print(factor_cache[key])
+        print("Factors: " + str(factor_cache[key]))
         return
     factor_list = {}
     for i in range(0, len(sorted_list)):
@@ -46,7 +46,7 @@ def print_factors(num_list):
                 factors.append(sorted_list[j])
         factor_list[sorted_list[i]] = factors
 
-    print(factor_list)
+    print("Factors: " + str(factor_list))
     factor_cache[key] = factor_list
 
 def print_multiples(num_list):
@@ -56,8 +56,7 @@ def print_multiples(num_list):
     if key in muliple_cache:
         # Already calculated this one
         # No need to do it again
-        print("CACHE")
-        print(muliple_cache[key])
+        print("Multiples: " + str(muliple_cache[key]))
         return
     multiple_list = {}
     for i in range(0, len(sorted_list)):
@@ -67,18 +66,15 @@ def print_multiples(num_list):
                 multiples.append(sorted_list[j])
         multiple_list[sorted_list[i]] = multiples
 
-    print(multiple_list)
+    print("Multiples: " + str(multiple_list))
     muliple_cache[key] = multiple_list
 
 
 if __name__ == "__main__":
     init_cache()
 
-    nums = [10, 5, 2, 20]
+    nums = [int(x) for x in sys.argv[1:]]
     print_factors(nums)
-    print_factors(nums)
-    print_factors(nums)
-    print_multiples(nums)
     print_multiples(nums)
 
     save_cache()
